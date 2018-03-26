@@ -1,0 +1,15 @@
+
+.hide{
+    display:none;
+}
+.btn-buy{
+    margin-right:12px;
+    margin-bottom: 7px;
+}
+.grid{
+    display: grid;
+}
+
+.w-100{
+    width: 100%;
+}
