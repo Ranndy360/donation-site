@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import boot_donation.dao.InstitutionRepository;
 import boot_donation.model.Institution;
+import boot_donation.model.User;
 
 
 @Service
@@ -31,9 +32,8 @@ public class serviceInstitution {
 		return institutions;
 	}
 	
-	public Optional<Institution> find(int id) {
-		
-		return institutionRepository.findById(id);
+	public Institution findInstitution(int id){
+		return institutionRepository.findById(id).get();
 	}
 	
 	public void save(Institution institution) {

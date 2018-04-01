@@ -12,6 +12,14 @@
     <div class="col-xs-12 col-sm-6">
             <span class="txt-color-white">Donation site © 2018 </span>
     </div>
+    
+    <div class="col-xs-12 col-sm-6 text-right">
+            <span class="txt-color-white">
+	            <c:if test="${not empty visits }">
+	            	Visits today: <b>${visits }</b>
+	            </c:if> 
+            </span>
+    </div>
 
 </div>
 </div>

@@ -22,7 +22,7 @@
                                                      </a>
                                              </h5>
                                              <p class="price-container">
-                                                 <span>Donated: $10.52</span>
+                                                 <span>Donated: $${institution.donated }</span>
                                              </p>
                                              <span class="tag1"></span> 
                              </div>
@@ -34,8 +34,8 @@
                                  </a>
                              <% }else{%>
                              <buttom class="btn btn-sm btn-success btn-buy pull-right" data-id='${institution.id }' 
-                                     type="button" href='#' data-toggle="modal" data-target="#buy-modal" data-title="algo" 
-                                     data-desciption="descrip" data-date="mana" data-price="10.50" data-stock="0">
+                                     type="button" href='#' data-toggle="modal" data-target="#buy-modal" data-title="${institution.name }" 
+                                     data-desciption="${institution.description }" data-donated="${institution.donated }">
                                      Donate
                                  </buttom>
                              <% } %>
@@ -56,12 +56,12 @@
            <div class="modal-dialog" role="document">
              <div class="modal-content">
                <div class="modal-header">
-                 <h5 class="modal-title">Compra de Ticket</h5>
+                 <h5 class="modal-title">Thanks for your donation</h5>
                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                    <span aria-hidden="true">&times;</span>
                  </button>
                </div>
-                 <form action="Offert?action=b2ZmZXJ0LWJ1eQ==" method="POST" id="buy-form">
+                 <form action="/donate" method="POST" id="buy-form">
                     <div class="modal-body">
                       <div class="product-content product-wrap clearfix">
                              <div class="row">
@@ -84,12 +84,12 @@
                                  </div>                           
                                      <input type="hidden" name="id" class="id-modal"/>
                                      <div class="form-group">
-                                         <label for="recipient-name" class="form-control-label">Numero de tarjeta:</label>
+                                         <label for="recipient-name" class="form-control-label">Credit Card number:</label>
                                          <input type='text' class="form-control int"  minlength="5" maxlength="30" required name="card" id="card"/>
                                      </div>
                                       <div class="form-group">
-                                         <label for="recipient-name" class="form-control-label">Cantidad de Tickets:</label>
-                                         <input type="number" value="1" name="cantidad" id="cantidad" class="int form-control cantidad int" min="1"/> 
+                                         <label for="recipient-name" class="form-control-label">Quantity:</label>
+                                         <input type="text" value="1" name="quantity" id="quantity" class=" form-control cantidad float" /> 
                                          <label class="quantity-error"></label>
                                      </div>
                              </div>
@@ -97,8 +97,8 @@
                      </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary">Comprar</button>
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                      <button type="submit" class="btn btn-primary">Donate</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     </div>
                </form>
              </div>
@@ -115,51 +115,19 @@
        var price=0,new_price=0,stock=0;
        //agrega los valores al modal
        $(document).on('click','.btn-buy',function (e){
-           price=$(this).data('price');
-           stock=$(this).data('stock');
-           $('#cantidad').val(1);
+           $('#quantity').val("50.00");
            $('#card').val('');
            $('.id-modal').val($(this).data('id'));
            $('.title_modal').text($(this).data('title'));
            $('.description_modal').text($(this).data('description'));
-           $('.price_modal').text('Total: $'+price);
        });
        
-       //actualiza el total cuando cambia la cantidad
-       $(document).on('change','#cantidad',function (e){
-           $('.quantity-error').text('');
-           if(stock!=-1 && $(this).val()>stock){
-               $('.quantity-error').text('No hay existencias suficientes para esa cantidad');
-               $(this).val(1);
-           }
-                if($(this).val()>0){
-                    new_price=(price*$(this).val());
-                   $('.price_modal').text('Total: $'+new_price.toFixed(2));
-               }else{
-                   $(this).val('1');
-               }
-           
-       });
-       $(document).on('keyup','#cantidad',function (e){
-           $('.quantity-error').text('');
-           if(stock!=-1 && $(this).val()>stock){
-               $('.quantity-error').text('No hay existencias suficientes para esa cantidad');
-               $(this).val(1);
-           }
-                if($(this).val()>0){
-                    new_price=(price*$(this).val());
-                   $('.price_modal').text('Total: $'+new_price.toFixed(2));
-               }else{
-                   $(this).val('1');
-               }
-           
-       });
        //validaciones
           
         $('#buy-form').validate({
             debug: true,
               rules: {
-                "cantidad": {
+                "quantity": {
                   required: true,  
                   number:true
                 },
@@ -171,15 +139,15 @@
                 }          
               },
               messages: {
-                  "cantidad": {
-                      required: "Cantidad es requerido.",
-                      number:"Formato invalido."
+                  "quantity": {
+                      required: "Quantity is required.",
+                      number:"Invalid format."
                   },
                   "card": {
-                      required: "Numero de tarjeta es requerida.",
-                      minlength:"Numero de tarjeta minimo 10 caracteres.",
-                      maxlength:"Numero de tarjeta maximo 80 caracteres.",
-                      number:"Formato invalido."
+                      required: "Credit card numer is required.",
+                      minlength:"Credit card numer min 10 characters.",
+                      maxlength:"Credit card numer max 80 characters.",
+                      number:"Invalid format."
                   }
                 },
                 submitHandler: function(form) { 

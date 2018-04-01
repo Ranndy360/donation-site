@@ -1,7 +1,13 @@
 
-<% HttpSession sesion=request.getSession(false);
+<%@page import="org.springframework.web.context.request.RequestContextHolder"%>
+<%@page import="org.springframework.web.context.request.ServletRequestAttributes"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% 
+ServletRequestAttributes attr = (ServletRequestAttributes) 
+RequestContextHolder.currentRequestAttributes();
+HttpSession sesion= attr.getRequest().getSession(true);
     if(sesion.getAttribute("user_id")!=null)
-     response.sendRedirect("index.jsp");
+     response.sendRedirect("/");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -70,7 +76,7 @@
                   
                       <div class="r-form-1-top b-black">
                         <div class="text-center">
-                          <h1 class="white" style="font-size: 25px; margin: 0px;">INICIA SESIÓN</h1>
+                          <h1 class="white" style="font-size: 25px; margin: 0px;">LOGIN</h1>
                             </div>
                         </div>
                         <div class="r-form-1-bottom form-color" style="padding:0px 10px;">
@@ -78,23 +84,24 @@
                           <div class="form-group" style="padding-top: 10px; margin-bottom: 10px;">
                         
                            
-<%--                             <c:if test="${not empty sessionScope.error}" > --%>
-<!--                              <div class="alert alert-danger "> -->
-<!--                                  <h4><i class="icon-3 fa fa-ban"></i> Error</h4> -->
-                                
-<%--                                      <span><c:out value="${sessionScope.error}"/></span> --%>
-<%--                                      <% sesion.setAttribute("error",null); %> --%>
-<!--                              </div> -->
-<!--                             </c:if> -->
+                           <c:if test="${not empty sessionScope.error}" > 
                            
-                        <label class="gray" style="margin-bottom: 0px;">Correo Electrónico </label><br>
+                             <div class="alert alert-danger ">
+                                 <h4><i class="icon-3 fa fa-ban"></i> Error</h4>
+                                
+                                     <span><c:out value="${sessionScope.error}"/></span>
+                                     <% sesion.setAttribute("error",null); %>
+                             </div>
+                           </c:if> 
+                           
+                        <label class="gray" style="margin-bottom: 0px;">Email </label><br>
                         <input   class="input-form input-border-0" style="height: 27px ! important;" type="email"  name="email" required minlength="2" maxlength="80">
-                      <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>Por favor, ingresa tu correo electrónico</b></label>
+                      <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>Type your email</b></label>
                             </div>
                             <div class="form-group">
-                              <label class="gray" style="margin-bottom: 0px;">Contraseña</label><br>
+                              <label class="gray" style="margin-bottom: 0px;">Password</label><br>
                               <input class="input-form input-border-0" style="height: 27px ! important;" type="password"  name="password" autocomplete="off" required  minlength="2" maxlength="80">
-                      <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Ingresa tu contraseña</b> </label>
+                      <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Type your password</b> </label>
                             </div>
                             <div style="max-height: 27px;">
                              <div >
@@ -106,8 +113,8 @@
                       </div>
                        <div class="r-form-1-top b-black" style="padding: 9px;">
                       <div class="text-center">
-                       <button type="submit" id="login" class="btn btn-primary btn-lg submit" style="width: 85%; height: 29px; font-size: 15px; padding-top: 2px; padding-bottom: 2px; float:none;">INICIAR SESIÓN</button>
-                       <a href="register.jsp"  class="btn btn-success btn-lg submit" style="width: 85%; height: 29px; font-size: 15px; padding-top: 2px; padding-bottom: 2px; float:none;">REGISTRATE</a>
+                       <button type="submit" id="login" class="btn btn-primary btn-lg submit" style="width: 85%; height: 29px; font-size: 15px; padding-top: 2px; padding-bottom: 2px; float:none;">SIGN IN</button>
+                       <a href="/create"  class="btn btn-success btn-lg submit" style="width: 85%; height: 29px; font-size: 15px; padding-top: 2px; padding-bottom: 2px; float:none;">CREATE AN ACCOUNT</a>
                         </form>
                         </div>
                   </div>
@@ -163,15 +170,15 @@
         },
         messages: {
             "email": {
-                required: "Correo es requerido.",
-                minlength:"Correo minimo 2 caracteres.",
-                maxlength:"Correo maximo 80 caracteres.",
-                email:"Correo formato invalido."
+                required: "Email is required.",
+                minlength:"Email min 2 characters.",
+                maxlength:"Email max 50 characters.",
+                email:"Email invalid format."
             },
             "password": {
-                required: "Contrasena es requerida.",
-                minlength:"Correo minimo 2 caracteres.",
-                maxlength:"Correo maximo 80 caracteres.",
+                required: "Password is required.",
+                minlength:"Password min 2 characters.",
+                maxlength:"Password max 25 characters."
             }
           },
           submitHandler: function(form) { 

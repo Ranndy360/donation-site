@@ -11,19 +11,29 @@ import javax.persistence.Id;
 public class Institution implements Serializable{
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private String description;
+	private double donated;
 	
 	public Institution() {}
 	
-	public Institution(String name, String description) {
+	public Institution(String name, String description,double donated) {
 		super();
 		this.name = name;
 		this.description = description;
+		this.donated = donated;
 	}
 
+
+	public double getDonated() {
+		return donated;
+	}
+
+	public void setDonated(double donated) {
+		this.donated = donated;
+	}
 
 	public int getId() {
 		return id;
@@ -51,7 +61,8 @@ public class Institution implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Institution [id=" + id + ", name=" + name + ", description=" + description + "]";
+		return "Institution [id=" + id + ", name=" + name + ", description=" + description + ", donated=" + donated
+				+ "]";
 	}
 	
 }

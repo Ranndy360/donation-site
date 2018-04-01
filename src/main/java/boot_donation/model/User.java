@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class User implements Serializable{
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private String lastname;
@@ -23,7 +23,7 @@ public class User implements Serializable{
 	
 	public User() {}
 	
-	public User( String name, String lastname, String user, String password, String id_document, String email,
+	public User( String name, String lastname,  String email,String user, String password, String id_document,
 			int country_id) {
 		super();
 		
@@ -86,8 +86,8 @@ public class User implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", lastname=" + lastname + ", user=" + user + ", password="
-				+ password + ", id_document=" + id_document + ", email=" + email + ", country_id=" + country_id + "]";
+		return "User [id=" + id + ", name=" + name + ", lastname=" + lastname + ",email=" + email + ", user=" + user + ", password="
+				+ password + ", id_document=" + id_document + ",  country_id=" + country_id + "]";
 	}
 	
 }

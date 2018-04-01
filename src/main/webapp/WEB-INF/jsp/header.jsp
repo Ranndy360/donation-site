@@ -57,9 +57,9 @@
                 
     <div class="project-context hidden-xs">
 
-                <span class="label">Usuario:</span>
+                <span class="label">User:</span>
                 <span class="project-selector dropdown-toggle" data-toggle="dropdown">					
-                    randy	
+                    <c:out value="${sessionScope.user_name}"></c:out>
                 </span>
 
 
@@ -114,10 +114,10 @@
         <!-- logout button -->
         <div id="logout" class="btn-header transparent pull-right">
             <% if(sesion.getAttribute("user_id")==null){ %>
-                <span> <a href="/login" title="Iniciar Sesión" >
+                <span> <a href="/login" title="Log In" >
                         <i class="fa fa-sign-in"></i></a> </span>
                 <% }else{ %>
-                <span> <a href="Auth?action=bG9nb3V0" title="Cerrar Sesión" data-action="userLogout" data-logout-msg="¿Seguro deseas cerrar sesión?">
+                <span> <a href="/logout" title="Logout" data-action="userLogout" data-logout-msg="Are you sure to logout?">
                         <i class="fa fa-sign-out"></i></a> </span>
                 <% } %>
         </div>
@@ -139,23 +139,30 @@ rol=sesion.getAttribute("user_rol").toString();  %>
          <% if(sesion.getAttribute("user_id")!=null){ %>
             <li>
 
-               <a href="Profile?action=c2hvdy1wcm9maWxl" title="Dashboard"><i class="fa fa-lg fa-fw fa-user-circle-o"></i> 
+               <a href="/profile" title="Dashboard"><i class="fa fa-lg fa-fw fa-user-circle-o"></i> 
                    <span class="menu-item-parent"> Perfil</span></a>
 
              </li>
             
+           <li>
+
+               <a href="/donations" title="My donations"><i class="fa fa-lg fa-fw fa-dollar"></i> 
+                   <span class="menu-item-parent"> My donations</span></a>
+
+             </li>
           <% } %>
-          <li>
+             
+          <!-- <li>
          
               <a href="#" title="Dashboard"><i class="fa fa-lg fa-fw fa-ticket"></i> 
                   <span class="menu-item-parent"> Ofertas</span></a>
             <ul>
               <li>
                  
-                <a href="index.jsp" title="Ofertas"><span class="menu-item-parent">Listado</span></a>
+                <a href="/index" title="Ofertas"><span class="menu-item-parent">Listado</span></a>
               </li>
             </ul> 
-          </li>
+          </li> -->
 
         </ul>
 
@@ -173,7 +180,7 @@ rol=sesion.getAttribute("user_rol").toString();  %>
     <div id="ribbon">
             <!-- breadcrumb -->
             <ol class="breadcrumb">
-                    <li> <a href="index.jsp">Donation site</a> </li> 
+                    <li> <a href="/">Donation site</a> </li> 
             </ol>
          
 

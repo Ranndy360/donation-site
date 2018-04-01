@@ -2,12 +2,12 @@
 Donation web site is java web site.
 
 # Feature
-* Register users 40%
-* Login 80%
-* List of institutions  90%
-* Make donations to institutions 10%
-* See my donations record 0%
-* Register visitors quantity 0%
+* Register users 100%
+* Login 100%
+* List of institutions  100%
+* Make donations to institutions 100%
+* See my donations record 100%
+* Register visitors quantity 100%
 
 # Resources
 * Java 1.8.0
@@ -15,6 +15,7 @@ Donation web site is java web site.
 * Maven 4.0.0
 * Spring framework 2.0.0
 * Mysql 5.0.12 - Xamp
+* JRE 1.8.0_12
 
 # Install
 * Create a BDD name: donation_site 
