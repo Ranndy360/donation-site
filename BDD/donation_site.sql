@@ -287,7 +287,8 @@ CREATE TABLE `donations` (
   `mount` decimal(11,2) DEFAULT NULL,
   `institution_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `card` varchar(15) COLLATE utf8_bin DEFAULT NULL
+  `card` varchar(15) COLLATE utf8_bin DEFAULT NULL,
+  `institution_name` varchar(80) COLLATE utf8_bin DEFAULT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -299,7 +300,8 @@ CREATE TABLE `donations` (
 CREATE TABLE `institution` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8_bin NOT NULL,
-  `description` text COLLATE utf8_bin NOT NULL
+  `description` text COLLATE utf8_bin NOT NULL,
+  `donated` decimal(11,2) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
